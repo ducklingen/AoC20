@@ -64,10 +64,10 @@ for p in passports:
                 validPassport = passportValidator(a, b)
 
     if validPassport:
-        print("Valid: " + p)
+        print(p)
         validPassports += 1
-    else:
-        print("Invalid: " + p)
+    # else:
+    #     print("Invalid: " + p)
 
 # print('True: ' + str(passportValidator('byr', '2002')))
 # print('False: ' + str(passportValidator('byr', '2003')))
