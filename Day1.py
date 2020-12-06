@@ -1,6 +1,5 @@
 import math
 import sys
-import unittest
 from itertools import combinations
 
 from helpers import AoCHelper
