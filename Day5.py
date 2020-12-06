@@ -4,6 +4,7 @@ from helpers.AoCHelper import prints
 
 input = AoCHelper.readInputLines("day5/day5input1.txt")
 
+
 def beregnSeatId(inputstring):
     rows = range(127)
     for letter in inputstring[0:7]:
@@ -30,7 +31,7 @@ for i in input:
 
     if seatId > maxSeatId:
         maxSeatId = seatId
-    seatIds.append(beregnSeatId(i))
+    seatIds.append(seatId)
 
 assert maxSeatId == 976
 print("Part 1: " + str(maxSeatId))
