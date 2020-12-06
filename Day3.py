@@ -9,10 +9,7 @@ forest = [i*patternExpansion*10 for i in input]
 
 
 def treesInSlope(x,y):
-    trees = 0
-    for k in range(math.ceil(len(input)/x)):
-        trees += (forest[x*k][y*k] == '#')
-    return trees
+    return sum([(forest[x*k][y*k] == '#') for k in range(math.ceil(len(input)/x))])
 
 
 assert treesInSlope(1, 3) == 181
