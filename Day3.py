@@ -16,8 +16,7 @@ for i in input:
 def treesInSlope(x,y):
     trees = 0
     for k in range(math.ceil(len(input)/x)):
-        if forest[x*k][y*k] == '#':
-            trees += 1
+        trees += (forest[x*k][y*k] == '#')
     return trees
 
 

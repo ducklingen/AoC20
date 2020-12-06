@@ -55,9 +55,7 @@ for p in passports:
 
     if hasRequiredKeys(fieldKeys):
         passportsWithRequiredKeys += 1
-
-        if validateFields(fields):
-            validPassports += 1
+        validPassports += bool(validateFields(fields))
     else:
         continue
 

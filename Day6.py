@@ -22,9 +22,9 @@ for c in ascii_lowercase:
         for i in g:
             if c not in i:
                 allYes = False
+                break
 
-        if allYes:
-            numberOfYeses += 1
+        numberOfYeses += allYes
 
 assert numberOfYeses == 3360
 prints("Part 2: " + str(numberOfYeses))

@@ -3,7 +3,8 @@ from helpers import AoCHelper
 from helpers.AoCHelper import prints
 
 input = AoCHelper.readInputLines("day2/day2input1.txt")
-validPasswords = 0
+validPasswords1 = 0
+validPasswords2 = 0
 
 
 def validPassword1(input):
@@ -23,16 +24,10 @@ def validPassword2(input):
 
 
 for i in input:
-    if validPassword1(i):
-        validPasswords = validPasswords + 1
+    validPasswords1 += validPassword1(i)
+    validPasswords2 += validPassword2(i)
 
-assert validPasswords == 538
-print("Part 1: " + str(validPasswords))
-validPasswords = 0
-
-for i in input:
-    if validPassword2(i):
-        validPasswords = validPasswords + 1
-
-assert validPasswords == 489
-print("Part 2: " + str(validPasswords))
+assert validPasswords1 == 538
+print("Part 1: " + str(validPasswords1))
+assert validPasswords2 == 489
+print("Part 2: " + str(validPasswords2))
