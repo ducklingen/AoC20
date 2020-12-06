@@ -1,43 +1,29 @@
 import math
 import re
 from string import ascii_lowercase
-
 from helpers import AoCHelper
-from helpers.AoCHelper import prints, prod
+from helpers.AoCHelper import prints, prod, listToString, groupLines
 
 input = AoCHelper.readInputLines("day6/day6input1.txt")
+groups = groupLines(input)
 
 numberOfYeses = 0
 
-groups = []
-group = ''
+for g in groups:
+    numberOfYeses += len(set(listToString(g)))
 
-for i in input:
-    if i == '':
-        groups.append(group)
-        group = ''
-    else:
-        group += (i)
-
-groups.append(group)
-
-# for g in groups:
-#     numberOfYeses += len(set(g))
+print("Part 1: " + str(numberOfYeses))
+numberOfYeses = 0
 
 for c in ascii_lowercase:
-    allYes = True
+    for g in groups:
+        allYes = True
+        for i in g:
+            if c not in i:
+                allYes = False
 
-    for i in input:
-        if i == '':
-            if allYes:
-                numberOfYeses += 1
-            allYes = True
+        if allYes:
+            numberOfYeses += 1
 
-        if i != '' and c not in i:
-            allYes = False
-
-    if allYes:
-        numberOfYeses += 1
-
-prints(numberOfYeses)
+prints("Part 2: " + str(numberOfYeses))
 

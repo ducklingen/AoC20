@@ -1,26 +1,17 @@
 import math
 import re
 from helpers import AoCHelper
-from helpers.AoCHelper import prints
+from helpers.AoCHelper import prints, groupLines, listToString
 
 input = AoCHelper.readInputLines("day4/day4input1.txt")
+passports = [listToString(l, ' ') for l in groupLines(input)]
 
 requiredKeys = ['byr', 'iyr', 'eyr', 'hgt', 'ecl', 'hcl', 'pid']
 
 validPassports = 0
-passports = []
-passport = ""
+passportsWithRequiredKeys = 0
 
-for i in input:
-    if i == '':
-        passports.append(passport)
-        passport = ''
-    else:
-        passport += (i + ' ')
-
-passports.append(passport)
-
-def passportValidator(key, value):
+def passportFieldValidator(key, value):
     if key == 'byr':
         return 1920 <= int(value) <= 2002
     elif key == 'iyr':
@@ -55,6 +46,7 @@ for p in passports:
             validPassport = False
 
     if validPassport:
+        passportsWithRequiredKeys += 1
         for f in fields:
             if f == '':
                 continue
@@ -62,10 +54,10 @@ for p in passports:
             a,b = f.split(':')
 
             if validPassport:
-                validPassport = passportValidator(a, b)
+                validPassport = passportFieldValidator(a, b)
 
     if validPassport:
-        print(p)
         validPassports += 1
 
-prints(validPassports)
+print("Part 1: " + str(passportsWithRequiredKeys))
+print("Part 2: " + str(validPassports))
