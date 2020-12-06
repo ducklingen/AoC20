@@ -29,7 +29,6 @@ for c in ascii_lowercase:
     for i in input:
         if i == '':
             if allYes:
-                print(c)
                 numberOfYeses += 1
             allYes = True
 
@@ -37,7 +36,6 @@ for c in ascii_lowercase:
             allYes = False
 
     if allYes:
-        print(c)
         numberOfYeses += 1
 
 print(str(numberOfYeses))
