@@ -5,6 +5,7 @@ from helpers.AoCHelper import prints
 input = AoCHelper.readInputLines("day2/day2input1.txt")
 validPasswords = 0
 
+
 def validPassword1(input):
     range, char, password = input.split( )
     min, max = map(int, range.split('-'))

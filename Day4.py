@@ -6,10 +6,27 @@ from helpers.AoCHelper import prints, groupLines, listToString
 input = AoCHelper.readInputLines("day4/day4input1.txt")
 passports = [listToString(l, ' ') for l in groupLines(input)]
 
-requiredKeys = ['byr', 'iyr', 'eyr', 'hgt', 'ecl', 'hcl', 'pid']
+requiredKeys = {'byr', 'iyr', 'eyr', 'hgt', 'ecl', 'hcl', 'pid'}
 
 validPassports = 0
 passportsWithRequiredKeys = 0
+
+
+def hasRequiredKeys(keys):
+    return requiredKeys.intersection(set(keys)) == requiredKeys
+
+
+def validateFields(fields):
+    validPassport = True
+    for f in fields:
+        key, value = f.split(':')
+
+        if validPassport:
+            validPassport = passportFieldValidator(key, value)
+        else:
+            return False
+    return validPassport
+
 
 def passportFieldValidator(key, value):
     if key == 'byr':
@@ -22,42 +39,27 @@ def passportFieldValidator(key, value):
         return (re.search('^\d*cm$', value) and 150 <= int(value.replace('cm', '')) <= 193) \
                or (re.search('^\d*in$', value) and 59 <= int(value.replace('in', '')) <= 76)
     elif key == 'hcl':
-        return bool(re.search('^#[0-9a-f]{6}', value))
+        return re.search('^#[0-9a-f]{6}', value)
     elif key == 'ecl':
         return value in ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
     elif key == 'pid':
-        return bool(re.search('^\d{9}$', value))
-    elif key == 'cid':
-        return True
+        return re.search('^\d{9}$', value)
     else:
-        return False
+        return True
 
 
 for p in passports:
     validPassport = True
-    fields = p.split(' ')
-    fieldKeys = []
+    fields = [field for field in p.split(' ') if field.strip()]
+    fieldKeys = [f.split(':')[0] for f in fields]
 
-    for f in fields:
-        fieldKeys.append(f.split(':')[0])
-
-    for k in requiredKeys:
-        if k not in fieldKeys:
-            validPassport = False
-
-    if validPassport:
+    if hasRequiredKeys(fieldKeys):
         passportsWithRequiredKeys += 1
-        for f in fields:
-            if f == '':
-                continue
 
-            a, b = f.split(':')
-
-            if validPassport:
-                validPassport = passportFieldValidator(a, b)
-
-    if validPassport:
-        validPassports += 1
+        if validateFields(fields):
+            validPassports += 1
+    else:
+        continue
 
 assert passportsWithRequiredKeys == 192
 print("Part 1: " + str(passportsWithRequiredKeys))
