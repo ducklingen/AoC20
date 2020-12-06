@@ -17,3 +17,12 @@ def readInputCommaLines(fileName):
         lists.append(i.split(','))
 
     return lists
+
+def prints(i):
+    print(str(i))
+
+def prod(ints):
+    p = 1
+    for i in ints:
+        p*=int(i)
+    return p

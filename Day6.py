@@ -3,6 +3,7 @@ import re
 from string import ascii_lowercase
 
 from helpers import AoCHelper
+from helpers.AoCHelper import prints, prod
 
 input = AoCHelper.readInputLines("day6/day6input1.txt")
 
@@ -38,5 +39,5 @@ for c in ascii_lowercase:
     if allYes:
         numberOfYeses += 1
 
-print(str(numberOfYeses))
+prints(numberOfYeses)
 
