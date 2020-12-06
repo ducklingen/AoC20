@@ -51,7 +51,7 @@ for p in passports:
             if f == '':
                 continue
 
-            a,b = f.split(':')
+            a, b = f.split(':')
 
             if validPassport:
                 validPassport = passportFieldValidator(a, b)
@@ -59,5 +59,7 @@ for p in passports:
     if validPassport:
         validPassports += 1
 
+assert passportsWithRequiredKeys == 192
 print("Part 1: " + str(passportsWithRequiredKeys))
+assert validPassports == 101
 print("Part 2: " + str(validPassports))

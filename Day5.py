@@ -21,6 +21,7 @@ def beregnSeatId(inputstring):
 
     return rows.start*8+columns.start
 
+
 maxSeatId = 0
 seatIds = []
 
@@ -31,10 +32,12 @@ for i in input:
         maxSeatId = seatId
     seatIds.append(beregnSeatId(i))
 
+assert maxSeatId == 976
 print("Part 1: " + str(maxSeatId))
 
 for j in range(len(seatIds)):
     if j-1 in seatIds and j+1 in seatIds and j not in seatIds:
+        assert j == 685
         print("Part 2: " + str(j))
 
 

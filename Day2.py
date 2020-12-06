@@ -25,6 +25,7 @@ for i in input:
     if validPassword1(i):
         validPasswords = validPasswords + 1
 
+assert validPasswords == 538
 print("Part 1: " + str(validPasswords))
 validPasswords = 0
 
@@ -32,4 +33,5 @@ for i in input:
     if validPassword2(i):
         validPasswords = validPasswords + 1
 
+assert validPasswords == 489
 print("Part 2: " + str(validPasswords))
