@@ -1,3 +1,5 @@
+import re
+
 def readInputLines(fileName, linebreaks = False):
     if linebreaks:
         return [line for line in open("Inputs/" + fileName)]
