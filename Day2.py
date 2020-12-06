@@ -1,20 +1,20 @@
 import math
 from helpers import AoCHelper
+from helpers.AoCHelper import prints
 
 validPasswords = 0
 input = AoCHelper.readInputLines("day2/day2input1.txt")
 
 def validPassword(input):
-    parts = input.split( )
-    minOccurence = int(parts[0].split('-')[0])
-    maxOccurence = int(parts[0].split('-')[1])
+    range,char,password = input.split( )
+    min, max = map(int, range.split('-'))
 
-    character = parts[1].replace(':','')
+    character = char.replace(':','')
 
-    return (list(parts[2])[minOccurence-1] == character) ^ (list(parts[2])[maxOccurence-1] == character)
+    return (list(password)[min-1] == character) ^ (list(password)[max-1] == character)
 
 for i in input:
     if validPassword(i):
         validPasswords = validPasswords + 1
 
-print(str(validPasswords))
+prints(validPasswords)

@@ -1,6 +1,6 @@
 import math
-import re
 from helpers import AoCHelper
+from helpers.AoCHelper import prints
 
 input = AoCHelper.readInputLines("day5/day5input1.txt")
 
@@ -19,7 +19,7 @@ def beregnSeatId(inputstring):
         else:
             columns = columns[math.ceil(len(columns)/2):]
 
-    return rows.start8+columns.start
+    return rows.start*8+columns.start
 
 # maxSeatId = 0
 seatIds = []
@@ -33,7 +33,7 @@ for i in input:
 
 for j in range(len(seatIds)):
     if j-1 in seatIds and j+1 in seatIds and j not in seatIds:
-        print(str(j))
+        prints(j)
 
 
 # print(str(maxSeatId))
