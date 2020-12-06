@@ -7,10 +7,7 @@ from helpers.AoCHelper import prints, prod, listToString, groupLines
 input = AoCHelper.readInputLines("day6/day6input1.txt")
 groups = groupLines(input)
 
-numberOfYeses = 0
-
-for g in groups:
-    numberOfYeses += len(set(listToString(g)))
+numberOfYeses = sum([len(set(listToString(g))) for g in groups])
 
 assert numberOfYeses == 6625
 print("Part 1: " + str(numberOfYeses))
