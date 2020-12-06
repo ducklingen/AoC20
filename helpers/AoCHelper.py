@@ -1,20 +1,20 @@
 import re
 
-def readInputLines(fileName, linebreaks = False):
+
+def readInputLines(filename, linebreaks=False):
     if linebreaks:
-        return [line for line in open("Inputs/" + fileName)]
+        return [line for line in open("Inputs/" + filename)]
     else:
-        return [line.rstrip('\n') for line in open("Inputs/" + fileName)]
+        return [line.rstrip('\n') for line in open("Inputs/" + filename)]
 
 
-def readInputCommaLine(fileName):
-    lines = readInputLines(fileName)
+def readInputCommaLine(filename):
+    lines = readInputLines(filename)
     return lines[0].split(',')
 
 
-def readInputCommaLines(fileName):
-
-    lines = readInputLines(fileName)
+def readInputCommaLines(filename):
+    lines = readInputLines(filename)
 
     lists = []
 
@@ -31,22 +31,22 @@ def prints(i):
 def prod(ints):
     p = 1
     for i in ints:
-        p*=int(i)
+        p *= int(i)
     return p
 
 
-def listToString(list, separator = ''):
+def listToString(listofstrings, separator=''):
     string = ''
-    for l in list:
+    for l in listofstrings:
         string += (str(l) + separator)
     return string
 
 
-def groupLines(input):
+def groupLines(inputlines):
     groups = []
     group = []
 
-    for i in input:
+    for i in inputlines:
         if i == '':
             groups.append(group)
             group = []
