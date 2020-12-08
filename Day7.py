@@ -5,7 +5,6 @@ inputlines = readInputLines('day7/day7input1.txt')
 specialbag = 'shiny gold bag'
 
 bags = {}
-bagsWithShinyGold = 0
 
 for i in inputlines:
     i = i.replace('bags', 'bag').replace('.', '')
@@ -21,37 +20,23 @@ for i in inputlines:
     bags[container] = indholdsliste
 
 
-def containsShinyGold(baglist, bags, parentbags):
+def containsShinyGold(baglist, bags):
     contains = False
     for bag in baglist:
         if bag[1] == specialbag:
-            print(listToString(parentbags, ' -> ') + specialbag)
-            # print(parentbags[-1:])
             contains = True
             break
 
-    if not contains:
-        for bag in baglist:
-            parentage = parentbags
-            parentage.append(bag[1])
-            contains = containsShinyGold(bags[bag[1]], bags, parentage)
-            if contains:
-                break
+    if not contains and baglist != []:
+        contains = max([containsShinyGold(bags[bag[1]], bags) for bag in baglist])
 
     return contains
 
+
 def containsNumberOfBags(baglist, bags):
-    bagsContained = 0
-    for bag in baglist:
-        bagsContained += int(bag[0]) + int(bag[0])*containsNumberOfBags(bags[bag[1]], bags)
+    return sum([int(bag[0]) + int(bag[0])*containsNumberOfBags(bags[bag[1]], bags) for bag in baglist])
 
-    return bagsContained
-
-print(containsNumberOfBags(bags['shiny gold bag'], bags))
-
-# for bag in bags:
-#     if containsShinyGold(bags[bag], bags, [bag]):
-#         # print(bag)
-#         bagsWithShinyGold += 1
-
-print(bagsWithShinyGold)
+assert sum([containsShinyGold(bags[bag], bags) for bag in bags]) == 192
+print("Part 1: " + str(sum([containsShinyGold(bags[bag], bags) for bag in bags])))
+assert containsNumberOfBags(bags[specialbag], bags) == 12128
+print("Part 2: " + str(containsNumberOfBags(bags[specialbag], bags)))
