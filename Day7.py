@@ -36,6 +36,7 @@ def containsShinyGold(baglist, bags):
 def containsNumberOfBags(baglist, bags):
     return sum([int(bag[0]) + int(bag[0])*containsNumberOfBags(bags[bag[1]], bags) for bag in baglist])
 
+
 assert sum([containsShinyGold(bags[bag], bags) for bag in bags]) == 192
 print("Part 1: " + str(sum([containsShinyGold(bags[bag], bags) for bag in bags])))
 assert containsNumberOfBags(bags[specialbag], bags) == 12128
