@@ -2,27 +2,27 @@ from helpers.AoCHelper import *
 
 inputlines = readInputLines('day8/day8input1.txt')
 
-def alterProgram(i, program):
+def alterProgram(index, program):
     newProgram = [x for x in program]
-    operation = program[i]
+    operation = program[index]
 
     if operation[0:3] == 'jmp':
-        newProgram[i] = operation.replace('jmp', 'nop')
+        newProgram[index] = operation.replace('jmp', 'nop')
     elif operation[0:3] == 'nop':
-        newProgram[i] = operation.replace('nop', 'jmp')
+        newProgram[index] = operation.replace('nop', 'jmp')
 
     return newProgram
 
-def executeOperation(i, operation, accumulator):
+def executeOperation(index, operation, accumulator):
     if operation[0:3] == 'acc':
         accumulator += extract_numbers_from_line(operation)[0]
-        i += 1
+        index += 1
     elif operation[0:3] == 'jmp':
-        i += extract_numbers_from_line(operation)[0]
+        index += extract_numbers_from_line(operation)[0]
     else:
-        i += 1
+        index += 1
 
-    return accumulator, i
+    return accumulator, index
 
 
 def runprogram(program):
@@ -43,9 +43,9 @@ print("Part 1: " + str(runprogram(inputlines)[0]))
 
 # Part 2
 for i in range(len(inputlines)):
-    a, terminated = runprogram(alterProgram(i, readInputLines('day8/day8input1.txt')))
+    accumulator, terminated = runprogram(alterProgram(i, readInputLines('day8/day8input1.txt')))
 
     if terminated:
-        assert a == 1174
-        print("Part 2: " + str(a))
+        assert accumulator == 1174
+        print("Part 2: " + str(accumulator))
         break
