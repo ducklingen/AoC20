@@ -43,11 +43,11 @@ def containsShinyGold(baglist, bags, parentbags):
 def containsNumberOfBags(baglist, bags):
     bagsContained = 0
     for bag in baglist:
-        print(bag[0] + ' x ' + bag[1])
         bagsContained += int(bag[0]) + int(bag[0])*containsNumberOfBags(bags[bag[1]], bags)
 
     return bagsContained
 
+print(containsNumberOfBags(bags['shiny gold bag'], bags))
 
 # for bag in bags:
 #     if containsShinyGold(bags[bag], bags, [bag]):
@@ -55,4 +55,3 @@ def containsNumberOfBags(baglist, bags):
 #         bagsWithShinyGold += 1
 
 print(bagsWithShinyGold)
-print(containsNumberOfBags(bags[specialbag], bags))
