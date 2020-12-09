@@ -20,7 +20,7 @@ for i in range(len(inputlines)):
             break
 
     if not valid:
-        print("Not valid:", str(n))
+        print("Part 1: ", str(n))
         break
 
 specialnumber = 10884537
@@ -39,5 +39,4 @@ for i in range(len(inputlines)):
             print("Range: (" + str(i) + ", " + str(j) + ")")
             break
 
-print(sum(map(int, inputlines[386: 403])))
-print(max(map(int, inputlines[386: 403])) + min(map(int, inputlines[386: 403])))
+print("Part 2: " + str(max(map(int, inputlines[386: 403])) + min(map(int, inputlines[386: 403]))))
