@@ -3,40 +3,45 @@ from itertools import combinations
 from helpers.AoCHelper import *
 
 inputlines = readInputLines('day9/day9input1.txt')
-
 preambleLength = 25
 
-for i in range(len(inputlines)):
-    if i < preambleLength:
-        continue
 
-    n = int(inputlines[int(i)])
+def find_invalid_number(lines):
+    for i in range(len(lines)):
+        if i < preambleLength:
+            continue
 
-    valid = False
+        valid = False
 
-    for j, k in combinations(inputlines[int(i)-preambleLength: int(i)], 2):
-        if int(j) + int(k) == n:
-            valid = True
-            break
+        for j, k in combinations(lines[int(i) - preambleLength: int(i)], 2):
+            if int(j) + int(k) == int(lines[int(i)]):
+                valid = True
+                break
 
-    if not valid:
-        print("Part 1: ", str(n))
-        break
+        if not valid:
+            return int(lines[int(i)])
 
-specialnumber = 10884537
 
-for i in range(len(inputlines)):
-    j = i+1
-    ix = int(inputlines[i])
+special_number = find_invalid_number(inputlines)
+assert special_number == 10884537
+print("Part 1:", str(special_number))
 
-    while ix < specialnumber:
-        # print(ix)
-        ix += int(inputlines[j])
-        j += 1
 
-        if ix == specialnumber:
-            # print(ix)
-            print("Range: (" + str(i) + ", " + str(j) + ")")
-            break
+def find_contiguous_set(lines, target_number):
+    for i in range(len(lines)):
+        j = i + 1
+        i_as_int = int(lines[i])
 
-print("Part 2: " + str(max(map(int, inputlines[386: 403])) + min(map(int, inputlines[386: 403]))))
+        while i_as_int < target_number:
+            i_as_int += int(lines[j])
+            j += 1
+
+            if i_as_int == target_number:
+                return i, j
+
+
+range_start, range_end = find_contiguous_set(inputlines, special_number)
+p2 = max(map(int, inputlines[range_start: range_end])) + min(map(int, inputlines[range_start: range_end]))
+
+assert p2 == 1261309
+print("Part 2: " + str(p2))
