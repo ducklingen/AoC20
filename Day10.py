@@ -13,34 +13,29 @@ adapters_used = set()
 
 output_joltage = 0
 
-# one_jolt_differences = 0
-# three_jolt_differences = 0
-#
-# while True:
-#     initial_output_joltage = output_joltage
-#     for i in inputlines:
-#         if i == output_joltage + 1:
-#             output_joltage = i
-#             one_jolt_differences += 1
-#             adapters_used.add(i)
-#         elif i == output_joltage + 2:
-#             output_joltage = i
-#             adapters_used.add(i)
-#         elif i == output_joltage + 3:
-#             output_joltage = i
-#             three_jolt_differences += 1
-#             adapters_used.add(i)
-#
-#     if initial_output_joltage == output_joltage:
-#         print("No new adapters found")
-#         break
+one_jolt_differences = 0
+three_jolt_differences = 0
 
-# print(len(inputlines))
-# print(len(adapters_used))
-# print(output_joltage+3)
-# print(one_jolt_differences)
-# print(three_jolt_differences)
-# print(one_jolt_differences * (three_jolt_differences+1))
+while True:
+    initial_output_joltage = output_joltage
+    for i in inputlines:
+        if i == output_joltage + 1:
+            output_joltage = i
+            one_jolt_differences += 1
+            adapters_used.add(i)
+        elif i == output_joltage + 2:
+            output_joltage = i
+            adapters_used.add(i)
+        elif i == output_joltage + 3:
+            output_joltage = i
+            three_jolt_differences += 1
+            adapters_used.add(i)
+
+    if initial_output_joltage == output_joltage:
+        print("No new adapters found")
+        break
+
+print(one_jolt_differences * (three_jolt_differences+1))
 
 def valid_single_continuations(o, adapters):
     single_continuations = []
@@ -67,26 +62,3 @@ for i in inputlinesreversed:
         branch_numbers[i] = sum([branch_numbers[j] for j in continuations[i]])
 
 print(sum([branch_numbers[x] for x in inputlines[0:3]]))
-
-
-def valid_continuations(o, adapters):
-    continuations = 0
-
-    if len(adapters) == 1:
-        return 1
-
-    for idx, a in enumerate(adapters):
-        if o < a <= o+3:
-            continuations += valid_continuations(a, adapters[idx+1:])
-        elif a > o+3:
-            break
-
-    return continuations
-
-
-# print(valid_continuations(0, inputlines))
-
-# for i in inputlines:
-#     print(str(i) + ": " + str(valid_single_continuations(i, inputlines)))
-#
-# print(3*prod([valid_single_continuations(i, inputlines) for i in inputlines[:-1]]))
