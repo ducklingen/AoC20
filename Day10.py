@@ -28,7 +28,7 @@ while initial_output_joltage != output_joltage:
 
 
 assert one_jolt_differences * (three_jolt_differences + 1) == 1690
-print(one_jolt_differences * (three_jolt_differences + 1))
+print("Part 1: " + str(one_jolt_differences * (three_jolt_differences + 1)))
 
 ## Part 2
 input_lines_reversed = list(map(int, readInputLines('day10/day10input1.txt')))
@@ -46,4 +46,4 @@ for i in input_lines_reversed:
         branch_numbers[i] = 1
 
 assert branch_numbers[0] == 5289227976704
-print(branch_numbers[0])
+print("Part 2: " + str(branch_numbers[0]))
