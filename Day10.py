@@ -6,6 +6,7 @@ sys.setrecursionlimit(5000)
 
 ## Part 1
 inputlines = list(map(int, readInputLines('day10/day10input1.txt')))
+inputlines.append(0)
 inputlines.sort()
 
 output_joltage = 0
@@ -32,19 +33,18 @@ print(one_jolt_differences * (three_jolt_differences + 1))
 
 ## Part 2
 input_lines_reversed = list(map(int, readInputLines('day10/day10input1.txt')))
+input_lines_reversed.append(0)
 input_lines_reversed.sort(reverse=True)
-continuations = {}
 branch_numbers = {}
 
-for i in input_lines_reversed:
-    continuations[i] = list(filter(lambda x: i < x <= i+3, inputlines))
-
 
 for i in input_lines_reversed:
-    if not continuations[i]:
+    continuations = list(filter(lambda x: i < x <= i+3, inputlines))
+
+    if len(continuations) > 0:
+        branch_numbers[i] = sum([branch_numbers[j] for j in continuations])
+    else:
         branch_numbers[i] = 1
-    elif len(continuations[i]) > 0:
-        branch_numbers[i] = sum([branch_numbers[j] for j in continuations[i]])
 
-assert sum([branch_numbers[x] for x in set(input_lines_reversed).intersection((1, 2, 3))]) == 5289227976704
-print(sum([branch_numbers[x] for x in set(input_lines_reversed).intersection((1, 2, 3))]))
+assert branch_numbers[0] == 5289227976704
+print(branch_numbers[0])
