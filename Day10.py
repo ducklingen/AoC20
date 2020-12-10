@@ -10,10 +10,11 @@ inputlines.append(0)
 inputlines.sort()
 
 output_joltage = 0
+initial_output_joltage = -1
 one_jolt_differences = 0
 three_jolt_differences = 0
 
-while True:
+while initial_output_joltage != output_joltage:
     initial_output_joltage = output_joltage
     for i in inputlines:
         if i == output_joltage + 1:
@@ -25,8 +26,6 @@ while True:
             output_joltage = i
             three_jolt_differences += 1
 
-    if initial_output_joltage == output_joltage:
-        break
 
 assert one_jolt_differences * (three_jolt_differences + 1) == 1690
 print(one_jolt_differences * (three_jolt_differences + 1))
