@@ -1,10 +1,11 @@
 from itertools import combinations, combinations_with_replacement
 import sys
 from helpers.AoCHelper import *
+from helpers.GlobalVariables import *
+
 sys.setrecursionlimit(5000)
 
 inputlines = readInputLines('day11/day11input1.txt')
-directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
 
 
 def get_adjacent_seats(i, j, seats, immediate_neighbour):
