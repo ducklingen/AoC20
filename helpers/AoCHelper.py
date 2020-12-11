@@ -1,5 +1,6 @@
 import re
-from helpers.GlobalVariables import *
+
+from helpers.GlobalVariables import all_directions
 
 
 def readInputLines(filename, linebreaks=False):
@@ -68,7 +69,7 @@ def extract_numbers(lines):
     return [extract_numbers_from_line(line) for line in lines]
 
 
-def get_neighbours(i, j, grid, immediate_neighbour, characters_to_skip):
+def get_neighbours(i, j, grid, directions=all_directions, immediate_neighbour=True, characters_to_skip=[]):
     neighbours = []
 
     for x, y in directions:

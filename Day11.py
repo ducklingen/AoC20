@@ -20,7 +20,8 @@ def process_seats(seats, neighbour_limit, immediate_neighbour):
                 new_seat_row += seat_status
                 continue
 
-            adjacent_people = list(filter(lambda x: x == '#', get_neighbours(i, j, seats, immediate_neighbour, ['.'])))
+            adjacent_people = list(filter(lambda x: x == '#', get_neighbours(i, j, seats, all_directions,
+                                                                             immediate_neighbour, ['.'])))
 
             if seat_status == 'L' and len(adjacent_people) == 0:
                 new_seat_row += '#'
