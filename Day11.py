@@ -1,53 +1,31 @@
 from itertools import combinations
 import sys
 from helpers.AoCHelper import *
-
 sys.setrecursionlimit(5000)
 
 inputlines = readInputLines('day11/day11input1.txt')
 
 
-for i in inputlines:
-    print(i)
-
 def get_adjacent_seats(i, j, seats):
     adjacent_seats = []
 
-    height = len(seats)
-    width = len(seats[0])
-
-    if i > 0:
-        adjacent_seats.append(seats[i-1][j])
-        if j > 0:
-            adjacent_seats.append(seats[i-1][j-1])
-        if j < width - 1:
-            adjacent_seats.append(seats[i-1][j+1])
-    if j > 0:
-        adjacent_seats.append(seats[i][j-1])
-    if j < width - 1:
-        adjacent_seats.append(seats[i][j+1])
-    if i < height - 1:
-        adjacent_seats.append(seats[i+1][j])
-        if j > 0:
-            adjacent_seats.append(seats[i+1][j-1])
-        if j < width - 1:
-            adjacent_seats.append(seats[i+1][j+1])
+    for x in [-1, 0, 1]:
+        for y in [-1, 0, 1]:
+            if (x != 0 or y != 0) and 0 <= i + x < len(seats) and 0 <= j + y < len(seats[0]):
+                adjacent_seats.append(seats[i + x][j + y])
 
     return adjacent_seats
 
-def get_first_in_direction(i, j, seats, x, y):
-    first = '.'
-    height = len(seats)
-    width = len(seats[0])
 
-    while 0 <= i + x < height and 0 <= j + y < width:
+def get_first_in_direction(i, j, seats, x, y):
+    while 0 <= i + x < len(seats) and 0 <= j + y < len(seats[0]):
         if seats[i + x][j + y] != '.':
             return seats[i + x][j + y]
         else:
             i += x
             j += y
 
-    return first
+    return '.'
 
 
 def get_adjacent_seats2(i, j, seats):
@@ -60,51 +38,53 @@ def get_adjacent_seats2(i, j, seats):
 
     return adjacent_seats
 
-def process_seats(seats):
-    new_situation = []
-    height = len(seats)
-    width = len(seats[0])
 
-    for i in range(height):
+def process_seats(seats, neighbour_limit, immediate_neighbour):
+    new_configuration = []
+
+    for i in range(len(seats)):
         new_seat_row = ''
-        for j in range(width):
+        for j in range(len(seats[0])):
             seat_status = seats[i][j]
 
-            adjacent_people = list(filter(lambda x: x == '#', get_adjacent_seats2(i, j, seats)))
+            if seat_status == '.':
+                new_seat_row += seat_status
+                continue
+
+            if immediate_neighbour:
+                adjacent_people = list(filter(lambda x: x == '#', get_adjacent_seats(i, j, seats)))
+            else:
+                adjacent_people = list(filter(lambda x: x == '#', get_adjacent_seats2(i, j, seats)))
 
             if seat_status == 'L' and len(adjacent_people) == 0:
                 new_seat_row += '#'
-            elif seat_status == '#' and len(adjacent_people) >= 5:
+            elif seat_status == '#' and len(adjacent_people) >= neighbour_limit:
                 new_seat_row += 'L'
             else:
                 new_seat_row += seat_status
 
-        new_situation.append(new_seat_row)
+        new_configuration.append(new_seat_row)
 
-    print()
-    print('Processed seats')
-    print()
-    for seat_row in new_situation:
-        print(seat_row)
+    return new_configuration
 
-    return new_situation
 
-def unchanged_seats(old_seats, new_seats):
-    unchanged = True
-    for i in range(len(old_seats)):
-        if old_seats[i] != new_seats[i]:
-            unchanged = False
-            break
+def find_stable_configuration(initial_configuration, neighbour_limit, immediate_neighbour):
+    initial_seats = initial_configuration
+    updated_seats = process_seats(initial_configuration, neighbour_limit, immediate_neighbour)
 
-    return unchanged
+    while not min([i == j for i, j in zip(initial_seats, updated_seats)]):
+        initial_seats = updated_seats
+        updated_seats = process_seats(initial_seats, neighbour_limit, immediate_neighbour)
 
-updatedSeats = process_seats(inputlines)
-initial_seats = inputlines
+    return updated_seats
 
-while not unchanged_seats(initial_seats, updatedSeats):
-    initial_seats = updatedSeats
-    updatedSeats = process_seats(initial_seats)
 
-taken_seats = sum([seat_row.count('#') for seat_row in updatedSeats])
+# Part 1
+taken_seats = sum([seat_row.count('#') for seat_row in find_stable_configuration(inputlines, 4, True)])
+assert taken_seats == 2263
+print("Part 1: " + str(taken_seats))
 
-print(taken_seats)
+# Part 2
+taken_seats = sum([seat_row.count('#') for seat_row in find_stable_configuration(inputlines, 5, False)])
+assert taken_seats == 2002
+print("Part 2: " + str(taken_seats))
