@@ -81,10 +81,10 @@ def get_neighbours(i, j, grid, directions=all_directions, immediate_neighbour=Tr
     return neighbours
 
 
-def get_first_in_direction(i, j, seats, i_increment, j_increment, characters_to_skip):
-    while 0 <= i + i_increment < len(seats) and 0 <= j + j_increment < len(seats[0]):
-        if seats[i + i_increment][j + j_increment] not in characters_to_skip:
-            return seats[i + i_increment][j + j_increment]
+def get_first_in_direction(i, j, grid, i_increment, j_increment, characters_to_skip):
+    while 0 <= i + i_increment < len(grid) and 0 <= j + j_increment < len(grid[0]):
+        if grid[i + i_increment][j + j_increment] not in characters_to_skip:
+            return grid[i + i_increment][j + j_increment]
         else:
             i += i_increment
             j += j_increment
