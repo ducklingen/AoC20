@@ -1,3 +1,4 @@
+import copy
 from itertools import combinations, combinations_with_replacement
 import sys
 from helpers.AoCHelper import *
@@ -5,32 +6,29 @@ from helpers.GlobalVariables import *
 
 sys.setrecursionlimit(5000)
 
-input_lines = read_input_lines('day11/day11input1.txt')
+input_lines = [list(i) for i in read_input_lines('day11/day11input1.txt')]
 
 
 def process_seats(seats, neighbour_limit, immediate_neighbour):
-    new_configuration = []
+    new_configuration = copy.deepcopy(seats)
 
     for i in range(len(seats)):
-        new_seat_row = ''
         for j in range(len(seats[0])):
-            seat_status = seats[i][j]
+            seat_status = new_configuration[i][j]
 
-            if seat_status == '.':
-                new_seat_row += seat_status
+            if new_configuration == '.':
+                new_configuration[i][j] = seat_status
                 continue
 
             adjacent_people = list(filter(lambda x: x == '#', get_neighbours(i, j, seats, all_directions,
                                                                              immediate_neighbour, ['.'])))
 
             if seat_status == 'L' and len(adjacent_people) == 0:
-                new_seat_row += '#'
+                new_configuration[i][j] = '#'
             elif seat_status == '#' and len(adjacent_people) >= neighbour_limit:
-                new_seat_row += 'L'
+                new_configuration[i][j] = 'L'
             else:
-                new_seat_row += seat_status
-
-        new_configuration.append(new_seat_row)
+                new_configuration[i][j] = seat_status
 
     return new_configuration
 
