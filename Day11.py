@@ -1,20 +1,20 @@
-from itertools import combinations
+from itertools import combinations, combinations_with_replacement
 import sys
 from helpers.AoCHelper import *
 sys.setrecursionlimit(5000)
 
 inputlines = readInputLines('day11/day11input1.txt')
+directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
 
 
 def get_adjacent_seats(i, j, seats, immediate_neighbour):
     adjacent_seats = []
 
-    for x in [-1, 0, 1]:
-        for y in [-1, 0, 1]:
-            if immediate_neighbour and (x != 0 or y != 0) and 0 <= i + x < len(seats) and 0 <= j + y < len(seats[0]):
-                adjacent_seats.append(seats[i + x][j + y])
-            elif x != 0 or y != 0:
-                adjacent_seats.append(get_first_in_direction(i, j, seats, x, y))
+    for x, y in directions:
+        if immediate_neighbour and 0 <= i + x < len(seats) and 0 <= j + y < len(seats[0]):
+            adjacent_seats.append(seats[i + x][j + y])
+        else:
+            adjacent_seats.append(get_first_in_direction(i, j, seats, x, y))
 
     return adjacent_seats
 
