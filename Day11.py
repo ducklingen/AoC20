@@ -1,5 +1,4 @@
 import copy
-from itertools import combinations, combinations_with_replacement
 import sys
 from helpers.AoCHelper import *
 from helpers.GlobalVariables import *
