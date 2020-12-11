@@ -3,20 +3,20 @@ import re
 from helpers.GlobalVariables import all_directions
 
 
-def readInputLines(filename, linebreaks=False):
+def read_input_lines(filename, linebreaks=False):
     if linebreaks:
         return [line for line in open("Inputs/" + filename)]
     else:
         return [line.rstrip('\n') for line in open("Inputs/" + filename)]
 
 
-def readInputCommaLine(filename):
-    lines = readInputLines(filename)
+def read_input_comma_line(filename):
+    lines = read_input_lines(filename)
     return lines[0].split(',')
 
 
-def readInputCommaLines(filename):
-    lines = readInputLines(filename)
+def read_input_comma_lines(filename):
+    lines = read_input_lines(filename)
 
     lists = []
 
@@ -37,14 +37,14 @@ def prod(ints):
     return p
 
 
-def listToString(listofstrings, separator=''):
+def list_to_string(listofstrings, separator=''):
     string = ''
     for l in listofstrings:
         string += (str(l) + separator)
     return string
 
 
-def groupLines(inputlines):
+def group_lines(inputlines):
     groups = []
     group = []
 

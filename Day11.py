@@ -5,7 +5,7 @@ from helpers.GlobalVariables import *
 
 sys.setrecursionlimit(5000)
 
-input_lines = readInputLines('day11/day11input1.txt')
+input_lines = read_input_lines('day11/day11input1.txt')
 
 
 def process_seats(seats, neighbour_limit, immediate_neighbour):

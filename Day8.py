@@ -1,6 +1,6 @@
 from helpers.AoCHelper import *
 
-inputlines = readInputLines('day8/day8input1.txt')
+inputlines = read_input_lines('day8/day8input1.txt')
 
 
 def alter_program(index, program):
@@ -46,7 +46,7 @@ print("Part 1: " + str(run_program(inputlines)[0]))
 
 # Part 2
 for i in range(len(inputlines)):
-    accumulator, terminated = run_program(alter_program(i, readInputLines('day8/day8input1.txt')))
+    accumulator, terminated = run_program(alter_program(i, read_input_lines('day8/day8input1.txt')))
 
     if terminated:
         assert accumulator == 1174

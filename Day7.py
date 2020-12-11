@@ -1,6 +1,6 @@
 from helpers.AoCHelper import *
 
-inputlines = readInputLines('day7/day7input1.txt')
+inputlines = read_input_lines('day7/day7input1.txt')
 
 specialbag = 'shiny gold bag'
 
@@ -15,7 +15,7 @@ for i in inputlines:
             break
 
         list = j.split(' ')
-        indholdsliste.append((list[0], listToString(list[1:], ' ').strip()))
+        indholdsliste.append((list[0], list_to_string(list[1:], ' ').strip()))
 
     bags[container] = indholdsliste
 

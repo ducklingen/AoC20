@@ -2,7 +2,7 @@ import math
 from helpers import AoCHelper
 from helpers.AoCHelper import prints
 
-input = AoCHelper.readInputLines("day2/day2input1.txt")
+input = AoCHelper.read_input_lines("day2/day2input1.txt")
 
 
 def validPassword1(input):

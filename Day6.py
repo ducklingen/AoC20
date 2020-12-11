@@ -2,12 +2,12 @@ import math
 import re
 from string import ascii_lowercase
 from helpers import AoCHelper
-from helpers.AoCHelper import prints, prod, listToString, groupLines
+from helpers.AoCHelper import prints, prod, list_to_string, group_lines
 
-input = AoCHelper.readInputLines("day6/day6input1.txt")
-groups = groupLines(input)
+input = AoCHelper.read_input_lines("day6/day6input1.txt")
+groups = group_lines(input)
 
-numberOfYeses = sum([len(set(listToString(g))) for g in groups])
+numberOfYeses = sum([len(set(list_to_string(g))) for g in groups])
 
 assert numberOfYeses == 6625
 print("Part 1: " + str(numberOfYeses))

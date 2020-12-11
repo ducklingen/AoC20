@@ -5,7 +5,7 @@ from itertools import combinations
 from helpers import AoCHelper
 from helpers.AoCHelper import prints, prod
 
-input = AoCHelper.readInputLines("day1/day1input1.txt")
+input = AoCHelper.read_input_lines("day1/day1input1.txt")
 
 
 for ints in combinations(map(int, input), 2):

@@ -1,10 +1,10 @@
 import math
 import re
 from helpers import AoCHelper
-from helpers.AoCHelper import prints, groupLines, listToString
+from helpers.AoCHelper import prints, group_lines, list_to_string
 
-input = AoCHelper.readInputLines("day4/day4input1.txt")
-passports = [listToString(l, ' ') for l in groupLines(input)]
+input = AoCHelper.read_input_lines("day4/day4input1.txt")
+passports = [list_to_string(l, ' ') for l in group_lines(input)]
 
 requiredKeys = {'byr', 'iyr', 'eyr', 'hgt', 'ecl', 'hcl', 'pid'}
 

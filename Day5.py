@@ -2,7 +2,7 @@ import math
 from helpers import AoCHelper
 from helpers.AoCHelper import prints
 
-input = AoCHelper.readInputLines("day5/day5input1.txt")
+input = AoCHelper.read_input_lines("day5/day5input1.txt")
 
 
 def beregnSeatId(inputstring):

@@ -2,7 +2,7 @@ import math
 from helpers import AoCHelper
 from helpers.AoCHelper import prints, prod
 
-input = AoCHelper.readInputLines("day3/day3input1.txt")
+input = AoCHelper.read_input_lines("day3/day3input1.txt")
 
 def treesInSlope(x,y):
     return sum([(input[x*k][y*k % len(input[0])] == '#') for k in range(math.ceil(len(input)/x))])

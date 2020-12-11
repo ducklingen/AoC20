@@ -2,7 +2,7 @@ from itertools import combinations
 
 from helpers.AoCHelper import *
 
-inputlines = list(map(int, readInputLines('day9/day9input1.txt')))
+inputlines = list(map(int, read_input_lines('day9/day9input1.txt')))
 preambleLength = 25
 
 
