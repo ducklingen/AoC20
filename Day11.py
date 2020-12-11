@@ -6,13 +6,15 @@ sys.setrecursionlimit(5000)
 inputlines = readInputLines('day11/day11input1.txt')
 
 
-def get_adjacent_seats(i, j, seats):
+def get_adjacent_seats(i, j, seats, immediate_neighbour):
     adjacent_seats = []
 
     for x in [-1, 0, 1]:
         for y in [-1, 0, 1]:
-            if (x != 0 or y != 0) and 0 <= i + x < len(seats) and 0 <= j + y < len(seats[0]):
+            if immediate_neighbour and (x != 0 or y != 0) and 0 <= i + x < len(seats) and 0 <= j + y < len(seats[0]):
                 adjacent_seats.append(seats[i + x][j + y])
+            elif x != 0 or y != 0:
+                adjacent_seats.append(get_first_in_direction(i, j, seats, x, y))
 
     return adjacent_seats
 
@@ -28,17 +30,6 @@ def get_first_in_direction(i, j, seats, x, y):
     return '.'
 
 
-def get_adjacent_seats2(i, j, seats):
-    adjacent_seats = []
-
-    for x in [-1, 0, 1]:
-        for y in [-1, 0, 1]:
-            if x != 0 or y != 0:
-                adjacent_seats.append(get_first_in_direction(i, j, seats, x, y))
-
-    return adjacent_seats
-
-
 def process_seats(seats, neighbour_limit, immediate_neighbour):
     new_configuration = []
 
@@ -51,10 +42,7 @@ def process_seats(seats, neighbour_limit, immediate_neighbour):
                 new_seat_row += seat_status
                 continue
 
-            if immediate_neighbour:
-                adjacent_people = list(filter(lambda x: x == '#', get_adjacent_seats(i, j, seats)))
-            else:
-                adjacent_people = list(filter(lambda x: x == '#', get_adjacent_seats2(i, j, seats)))
+            adjacent_people = list(filter(lambda x: x == '#', get_adjacent_seats(i, j, seats, immediate_neighbour)))
 
             if seat_status == 'L' and len(adjacent_people) == 0:
                 new_seat_row += '#'
