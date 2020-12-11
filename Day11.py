@@ -5,7 +5,7 @@ from helpers.GlobalVariables import *
 
 sys.setrecursionlimit(5000)
 
-inputlines = readInputLines('day11/day11input1.txt')
+input_lines = readInputLines('day11/day11input1.txt')
 
 
 def process_seats(seats, neighbour_limit, immediate_neighbour):
@@ -46,11 +46,11 @@ def find_stable_configuration(initial_configuration, neighbour_limit, immediate_
 
 
 # Part 1
-taken_seats = sum([seat_row.count('#') for seat_row in find_stable_configuration(inputlines, 4, True)])
+taken_seats = sum([seat_row.count('#') for seat_row in find_stable_configuration(input_lines, 4, True)])
 assert taken_seats == 2263
 print("Part 1: " + str(taken_seats))
 
 # Part 2
-taken_seats = sum([seat_row.count('#') for seat_row in find_stable_configuration(inputlines, 5, False)])
+taken_seats = sum([seat_row.count('#') for seat_row in find_stable_configuration(input_lines, 5, False)])
 assert taken_seats == 2002
 print("Part 2: " + str(taken_seats))
