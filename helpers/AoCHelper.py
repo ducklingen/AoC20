@@ -92,6 +92,7 @@ def get_first_in_direction(i, j, grid, i_increment, j_increment, characters_to_s
 
     return '.'
 
+
 def turn_right(coordinates, degrees):
     for turn in range(ceil(degrees/90)):
         coordinates = (coordinates[1], -coordinates[0])
@@ -99,6 +100,7 @@ def turn_right(coordinates, degrees):
     return coordinates
 
 
+# Credit til Patrick
 def rotate(coordinates, angle):
     angle_in_radians = radians(angle)
     px, py = coordinates
