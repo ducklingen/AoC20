@@ -13,11 +13,11 @@ waypoint = (10, 1)
 direction = (1, 0)
 
 
-def turn(direction, degrees):
-    for i in range(math.ceil(degrees/90)):
-        direction = (direction[1], -direction[0])
+def turn_right(coordinates, degrees):
+    for turn in range(math.ceil(degrees/90)):
+        coordinates = (coordinates[1], -coordinates[0])
 
-    return direction
+    return coordinates
 
 
 for i in input_lines:
@@ -29,9 +29,9 @@ for i in input_lines:
     if operation == 'F':
         position = (position[0] + value * direction[0], position[1] + value * direction[1])
     if operation == 'R':
-        direction = turn(direction, value)
+        direction = turn_right(direction, value)
     if operation == 'L':
-        direction = turn(direction, 360-value)
+        direction = turn_right(direction, 360 - value)
 
 
 manhattan_distance = abs(position[0]) + abs(position[1])
@@ -50,9 +50,9 @@ for i in input_lines:
     if operation == 'F':
         position = (position[0] + value * waypoint[0], position[1] + value * waypoint[1])
     if operation == 'R':
-        waypoint = turn(waypoint, value)
+        waypoint = turn_right(waypoint, value)
     if operation == 'L':
-        waypoint = turn(waypoint, 360-value)
+        waypoint = turn_right(waypoint, 360 - value)
 
 
 manhattan_distance = abs(position[0]) + abs(position[1])
