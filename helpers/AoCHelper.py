@@ -1,4 +1,5 @@
 import re
+from math import radians, sin, cos, ceil
 
 from helpers.GlobalVariables import all_directions
 
@@ -90,3 +91,19 @@ def get_first_in_direction(i, j, grid, i_increment, j_increment, characters_to_s
             j += j_increment
 
     return '.'
+
+def turn_right(coordinates, degrees):
+    for turn in range(ceil(degrees/90)):
+        coordinates = (coordinates[1], -coordinates[0])
+
+    return coordinates
+
+
+def rotate(coordinates, angle):
+    angle_in_radians = radians(angle)
+    px, py = coordinates
+
+    qx = cos(angle_in_radians) * px - sin(angle_in_radians) * py
+    qy = sin(angle_in_radians) * px + cos(angle_in_radians) * py
+
+    return round(qx), round(qy)

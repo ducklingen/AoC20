@@ -9,16 +9,7 @@ sys.setrecursionlimit(5000)
 input_lines = read_input_lines('day12/day12input1.txt')
 
 position = (0, 0)
-waypoint = (10, 1)
 direction = (1, 0)
-
-
-def turn_right(coordinates, degrees):
-    for turn in range(math.ceil(degrees/90)):
-        coordinates = (coordinates[1], -coordinates[0])
-
-    return coordinates
-
 
 for i in input_lines:
     operation = i[0:1]
@@ -29,9 +20,9 @@ for i in input_lines:
     if operation == 'F':
         position = (position[0] + value * direction[0], position[1] + value * direction[1])
     if operation == 'R':
-        direction = turn_right(direction, value)
+        direction = rotate(direction, 360 - value)
     if operation == 'L':
-        direction = turn_right(direction, 360 - value)
+        direction = rotate(direction, value)
 
 
 manhattan_distance = abs(position[0]) + abs(position[1])
@@ -39,6 +30,7 @@ assert manhattan_distance == 1148
 print("Part 1: " + str(manhattan_distance))
 
 position = (0, 0)
+waypoint = (10, 1)
 
 for i in input_lines:
     operation = i[0:1]
@@ -50,9 +42,9 @@ for i in input_lines:
     if operation == 'F':
         position = (position[0] + value * waypoint[0], position[1] + value * waypoint[1])
     if operation == 'R':
-        waypoint = turn_right(waypoint, value)
+        waypoint = rotate(waypoint, 360 - value)
     if operation == 'L':
-        waypoint = turn_right(waypoint, 360 - value)
+        waypoint = rotate(waypoint, value)
 
 
 manhattan_distance = abs(position[0]) + abs(position[1])
