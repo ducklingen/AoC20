@@ -44,7 +44,7 @@ for i in input_lines:
     operation = i[0:1]
     value = int(i[1:])
 
-    if operation in ['S', 'N', 'W', 'E']:
+    if cardinal_directions_dict.get(operation, ''):
         waypoint = (waypoint[0] + cardinal_directions_dict[operation][0] * value,
                     waypoint[1] + cardinal_directions_dict[operation][1] * value)
     if operation == 'F':
