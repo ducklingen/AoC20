@@ -14,15 +14,37 @@ direction = (1, 0)
 
 
 def turn(direction, degrees):
-    new_direction = direction
     for i in range(math.ceil(degrees/90)):
-        new_direction = (new_direction[1], -new_direction[0])
+        direction = (direction[1], -direction[0])
 
-    return new_direction
+    return direction
 
 
 for i in input_lines:
-    print(i)
+    operation = i[0:1]
+    value = int(i[1:])
+
+    if operation == 'N':
+        position = (position[0], position[1] + value)
+    if operation == 'S':
+        position = (position[0], position[1] - value)
+    if operation == 'E':
+        position = (position[0] + value, position[1])
+    if operation == 'W':
+        position = (position[0] - value, position[1])
+    if operation == 'F':
+        position = (position[0] + value * direction[0], position[1] + value * direction[1])
+    if operation == 'R':
+        direction = turn(direction, value)
+    if operation == 'L':
+        direction = turn(direction, 360-value)
+
+
+manhattan_distance = abs(position[0]) + abs(position[1])
+assert manhattan_distance == 1148
+print("Part 1: " + str(manhattan_distance))
+
+for i in input_lines:
     operation = i[0:1]
     value = int(i[1:])
 
@@ -41,9 +63,7 @@ for i in input_lines:
     if operation == 'L':
         waypoint = turn(waypoint, 360-value)
 
-    print("New waypoint: " + str(waypoint))
-    print("New position: " + str(position))
 
 manhattan_distance = abs(position[0]) + abs(position[1])
-
-print("Part 1: " + str(manhattan_distance))
+assert manhattan_distance == 51419
+print("Part 2: " + str(manhattan_distance))
