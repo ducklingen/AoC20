@@ -24,14 +24,8 @@ for i in input_lines:
     operation = i[0:1]
     value = int(i[1:])
 
-    if operation == 'N':
-        position = (position[0], position[1] + value)
-    if operation == 'S':
-        position = (position[0], position[1] - value)
-    if operation == 'E':
-        position = (position[0] + value, position[1])
-    if operation == 'W':
-        position = (position[0] - value, position[1])
+    if operation in ['S', 'N', 'W', 'E']:
+        position = (position[0] + cardinal_directions_dict[operation][0] * value, position[1] + cardinal_directions_dict[operation][1] * value)
     if operation == 'F':
         position = (position[0] + value * direction[0], position[1] + value * direction[1])
     if operation == 'R':
@@ -44,18 +38,15 @@ manhattan_distance = abs(position[0]) + abs(position[1])
 assert manhattan_distance == 1148
 print("Part 1: " + str(manhattan_distance))
 
+position = (0, 0)
+
 for i in input_lines:
     operation = i[0:1]
     value = int(i[1:])
 
-    if operation == 'N':
-        waypoint = (waypoint[0], waypoint[1] + value)
-    if operation == 'S':
-        waypoint = (waypoint[0], waypoint[1] - value)
-    if operation == 'E':
-        waypoint = (waypoint[0] + value, waypoint[1])
-    if operation == 'W':
-        waypoint = (waypoint[0] - value, waypoint[1])
+    if operation in ['S', 'N', 'W', 'E']:
+        waypoint = (waypoint[0] + cardinal_directions_dict[operation][0] * value,
+                    waypoint[1] + cardinal_directions_dict[operation][1] * value)
     if operation == 'F':
         position = (position[0] + value * waypoint[0], position[1] + value * waypoint[1])
     if operation == 'R':
@@ -65,5 +56,5 @@ for i in input_lines:
 
 
 manhattan_distance = abs(position[0]) + abs(position[1])
-assert manhattan_distance == 51419
+assert manhattan_distance == 52203
 print("Part 2: " + str(manhattan_distance))
