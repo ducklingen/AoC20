@@ -24,7 +24,7 @@ for i in input_lines:
     operation = i[0:1]
     value = int(i[1:])
 
-    if operation in ['S', 'N', 'W', 'E']:
+    if cardinal_directions_dict.get(operation, ''):
         position = (position[0] + cardinal_directions_dict[operation][0] * value, position[1] + cardinal_directions_dict[operation][1] * value)
     if operation == 'F':
         position = (position[0] + value * direction[0], position[1] + value * direction[1])
