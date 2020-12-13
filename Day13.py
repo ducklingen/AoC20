@@ -61,8 +61,7 @@ def run_part_two(file_name):
         if valid_departure:
             break
         else:
-            if (departure_gaps[current_bus] + possible_departure) % current_bus == 0 \
-                    and (departure_gaps[next_bus] + possible_departure) % next_bus == 0:
+            if min([(departure_gaps[bus] + possible_departure) % bus == 0 for bus in [current_bus, next_bus]]):
                 if lcm(step, bus_ids[current_idx]) > step:
                     step = lcm(step, bus_ids[current_idx])
                 current_idx += 1
