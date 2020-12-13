@@ -30,7 +30,7 @@ def get_next_departure(min_departure, bus_id):
     return math.ceil(min_departure / bus_id) * bus_id
 
 
-def run_part_two(file_name, print_during=False):
+def run_part_two(file_name):
     input_line = read_input_lines('day13/' + file_name + '.txt')[1].split(',')
     bus_ids = extract_numbers_from_line(read_input_lines('day13/' + file_name + '.txt')[1])
     first_id = bus_ids[0]
@@ -69,7 +69,7 @@ def run_part_two(file_name, print_during=False):
 
             possible_departure += int(step)
 
-    return possible_departure % prod(bus_ids)
+    return possible_departure
 
 
 t0 = run_part_two('day13test0')
@@ -90,15 +90,10 @@ assert t4 == 1261476
 t5 = run_part_two('day13test5')
 assert t5 == 1202161486
 # print(t5)
-# #
-# #
+
+
 p2 = run_part_two('day13input1')
 assert p2 == 690123192779524
 print("Part 2: " + str(p2))
-
-
-# print(lcm(lcm(17, 13), 19))
-
-
 
 
