@@ -1,3 +1,4 @@
+import math
 import re
 from math import radians, sin, cos, ceil
 
@@ -109,3 +110,6 @@ def rotate(coordinates, angle):
     qy = sin(angle_in_radians) * px + cos(angle_in_radians) * py
 
     return round(qx), round(qy)
+
+def lcm(a, b):
+    return abs(a*b) // math.gcd(a, b)
