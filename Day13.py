@@ -55,7 +55,7 @@ def run_part_two(file_name):
         valid_departure = True
 
         for g in departure_gaps:
-            if (departure_gaps[g] + possible_departure) % int(g) != 0:
+            if (departure_gaps[g] + possible_departure) % g != 0:
                 valid_departure = False
 
         if valid_departure:
