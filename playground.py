@@ -1,13 +1,10 @@
-def sum(a, b):
-    print(str(a+b))
+from itertools import combinations_with_replacement, permutations
 
-sum(*[1, 2])
+combination_set = set()
 
-print(str(123 & 456))
+for i in combinations_with_replacement([0,1], 10):
+    for j in permutations(i):
+        combination_set.add(j)
 
-dict = {'a': 1, 'b': 2}
-
-if 'c' in dict.keys():
-    print('Nop')
-else:
-    print('Jep')
+for c in combination_set:
+    print(c)
