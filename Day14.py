@@ -8,10 +8,6 @@ from helpers.GlobalVariables import *
 
 sys.setrecursionlimit(5000)
 
-input_lines = read_input_lines('day14/day14input1.txt')
-mask = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-memory = {}
-
 
 def decimal_to_binary(n, expand=False):
     if expand:
@@ -20,17 +16,6 @@ def decimal_to_binary(n, expand=False):
         return '0'*leading_zeros + binary
     else:
         return bin(n).replace("0b", "")
-
-
-def mask_value(value_to_mask, mask, char_to_ignore):
-    new_value = ''
-    for i in range(len(mask)):
-        if mask[i] != char_to_ignore:
-            new_value += mask[i]
-        else:
-            new_value += value_to_mask[i]
-
-    return new_value
 
 
 def write_to_adresses(value, position, mask):
@@ -50,7 +35,22 @@ def write_to_adresses(value, position, mask):
         memory[new_position] = value
 
 
+def mask_value(value_to_mask, mask, char_to_ignore):
+    new_value = ''
+    for i in range(len(mask)):
+        if mask[i] != char_to_ignore:
+            new_value += mask[i]
+        else:
+            new_value += value_to_mask[i]
+
+    return new_value
+
+
 # Part 1
+input_lines = read_input_lines('day14/day14input1.txt')
+mask = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+memory = {}
+
 for i in input_lines:
     if i[:3] == 'mem':
         position, value = extract_numbers_from_line(i)
@@ -65,11 +65,11 @@ p1 = sum(memory.values())
 assert p1 == 11612740949946
 print(p1)
 
+# Part 2
 input_lines = read_input_lines('day14/day14input1.txt')
 mask = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 memory = {}
 
-# Part 2
 for i in input_lines:
     if i[:3] == 'mem':
         position, value = extract_numbers_from_line(i)
