@@ -1,5 +1,6 @@
 import math
 import re
+from itertools import product
 from math import radians, sin, cos, ceil
 
 from helpers.GlobalVariables import all_directions
@@ -113,3 +114,6 @@ def rotate(coordinates, angle):
 
 def lcm(a, b):
     return abs(a*b) // math.gcd(a, b)
+
+def get_all_combinations(list_of_values, size_of_tuples):
+    return [list(x) for x in product(list_of_values, repeat=size_of_tuples)]
