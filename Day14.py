@@ -63,7 +63,7 @@ for i in input_lines:
 
 p1 = sum(memory.values())
 assert p1 == 11612740949946
-print(p1)
+print("Part 1: " + str(p1))
 
 # Part 2
 input_lines = read_input_lines('day14/day14input1.txt')
@@ -80,4 +80,4 @@ for i in input_lines:
 
 p2 = sum(memory.values())
 assert p2 == 3394509207186
-print(p2)
+print("Part 2: " + str(p2))
