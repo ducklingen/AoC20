@@ -112,8 +112,26 @@ def rotate(coordinates, angle):
 
     return round(qx), round(qy)
 
+
 def lcm(a, b):
     return abs(a*b) // math.gcd(a, b)
 
+
 def get_all_combinations(list_of_values, size_of_tuples):
     return [list(x) for x in product(list_of_values, repeat=size_of_tuples)]
+
+
+def split_lines_into_chunks(lines, delimiters):
+    chuncks = []
+    chunk = []
+
+    for l in lines:
+        if l in delimiters:
+            chuncks.append(chunk)
+            chunk = []
+        else:
+            chunk.append(l)
+
+    chuncks.append(chunk)
+
+    return chuncks
