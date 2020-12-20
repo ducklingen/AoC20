@@ -47,9 +47,6 @@ rules, my, nearby = split_lines_into_chunks(input_lines, [''])
 nearby_numbers = [extract_numbers_from_line(n) for n in nearby]
 my_ticket = extract_numbers_from_line(my[1])
 position_lists = []
-
-
-
 ranges = []
 
 for r in rules:
@@ -57,16 +54,11 @@ for r in rules:
     ranges.append((a, b))
     ranges.append((c, d))
 
-rule_fields = {}
-
 valid_tickets = []
 for n in nearby_numbers[1:]:
     if min([is_valid(x, ranges) for x in n]) == 1:
         valid_tickets.append(n)
 
-
-print(len(nearby_numbers)-1)
-print(len(valid_tickets))
 
 for i in range(len(nearby_numbers[1])):
     position_list = []
@@ -75,35 +67,48 @@ for i in range(len(nearby_numbers[1])):
 
     position_lists.append(position_list)
 
+matching_rules_dict = {}
 
 for idx, p in enumerate(position_lists):
-    print(p)
     matching_rules = []
 
     for r in rules:
 
         a, b, c, d = extract_numbers_from_line(r)
         rule_name = r.split(':')[0]
-        if rule_name in rule_fields.keys() or idx in rule_fields.values():
+        if rule_name in matching_rules_dict.keys() or idx in matching_rules_dict.values():
             continue
 
-        print([a <= x <= b or c <= x <= d for x in p])
+        # print([a <= x <= b or c <= x <= d for x in p])
 
         if min([a <= x <= b or c <= x <= d for x in p]) == 1:
-            matching_rules.append(idx)
+            matching_rules.append(rule_name)
 
-    rule_fields[rule_name] = matching_rules
+    matching_rules_dict[idx] = matching_rules
 
-    if idx not in rule_fields.values():
+    if idx not in matching_rules_dict.keys() or len(matching_rules_dict[idx]) == 0:
         print("No remaining rules found matching values at position " + str(idx))
 
 p2 = 1
+
+rule_fields = {}
+
+while len(rule_fields.keys()) < len(rules):
+    for i in matching_rules_dict:
+        if len(matching_rules_dict[i]) == 1:
+            rule = matching_rules_dict[i][0]
+            print("Matching rule " + rule + " with column " + str(i))
+            rule_fields[i] = rule
+
+            for j in matching_rules_dict:
+                if i != j and rule in matching_rules_dict[j]:
+                    matching_rules_dict[j].remove(rule)
 
 for rf in rule_fields:
     print(rf)
     print(rule_fields[rf])
 
-    if rf[:9] == 'departure':
-        p2 *= int(my_ticket[rule_fields[rf]])
+    if rule_fields[rf][:9] == 'departure':
+        p2 *= int(my_ticket[rf])
 
 print(p2)
